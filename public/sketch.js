@@ -5,9 +5,7 @@ var resetButton;
 var changeColorButton;
 var numberOfUsersText;
 var currentNumberOfUsers;
-
 var myText;
-
 
 function setup() {
 	createCanvas(1000, 500);
@@ -35,11 +33,8 @@ function setup() {
 	socket.on('mouse', newDrawing);
 
 //Testar lite: 
-
 	socket.on('oldPaint', startPaint);
-
 	socket.on("clearYourScreens", receivedClearMessage);
-
 	socket.on("users", setCurrentNumberOfUsers);
 }	
 
@@ -47,7 +42,6 @@ function startPaint(oldPaint) {
 	noStroke();
 	fill(oldPaint.color);
 	ellipse(oldPaint.x, oldPaint.y, 30, 30);
-
 }
 //Följande händer då "mouse"-meddelanden tas emot via socket:en io (dvs då andra clienter har ritat något och detta även behöver ritas ut på andra clienters skärmar):
 function newDrawing(data) {
@@ -67,22 +61,16 @@ function mouseDragged() {
 	
 //Sedan skickar vi meddelandet till servern via socket-kopplingen genom att namnge meddelandet och bifoga informationen som meddelandet ska innehålla: 
 	socket.emit('mouse', data);
-	
-	if(lastPos.x == -100) {
-		
-	}
 
 	noStroke();
 	fill(myColor);
 	ellipse(mouseX, mouseY, 30, 30);
-
 }
 
 function sendClearMessage() {
 	socket.emit("clear");
 	clear();
 	background(51);
-
 }
 
 function receivedClearMessage() {
@@ -91,21 +79,14 @@ function receivedClearMessage() {
 }
  
 function changeMyColor() {
-	
 	myColor = [random(0,256), random(0,256), random(0,256)];
 }
 
 function setCurrentNumberOfUsers (users) {
-	
 	currentNumberOfUsers = users.x;
-
 	document.getElementById("numberOfUsersText").textContent = ("Users: " + currentNumberOfUsers);
-
-
-	
 }
 
 function draw() {
-
 
 }
